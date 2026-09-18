@@ -1,0 +1,18 @@
+:root { --accent: #2457d6; }
+body { line-height: 1.62; }
+.wy-nav-content, .container { max-width: 980px; }
+.hero {
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--accent);
+  background: #f4f7ff;
+  margin: 1rem 0 1.5rem;
+}
+.check { font-weight: 700; color: #146c2e; }
+.control-string {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  padding: .35rem .55rem;
+  border: 1px solid #ccd4e0;
+  background: #f7f9fb;
+  border-radius: 4px;
+}
+math { font-size: 1.1em; }
