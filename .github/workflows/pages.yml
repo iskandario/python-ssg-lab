@@ -33,8 +33,11 @@ jobs:
       - name: Build Sphinx in strict mode
         run: sphinx-build -W --keep-going -b html docs site
 
-      - name: Verify control string
-        run: grep -R -F "SSG-LAB-CONTROL-2026" site/index.html
+      - name: Verify generated research content
+        run: |
+          grep -F "SSG-LAB-CONTROL-2026" site/index.html
+          grep -F "Сравнительный анализ генераторов" site/t1-ssg-comparison.html
+          grep -F "<math" site/nir2-results.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

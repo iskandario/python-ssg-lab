@@ -4,7 +4,6 @@ copyright = '2026, Искандар Гарифуллин'
 
 extensions = [
     'myst_parser',
-    'sphinx.ext.mathjax',
 ]
 
 source_suffix = {

@@ -6,7 +6,8 @@
   <p class="hero-lead">Исследование архитектурных решений для веб-платформ прямых и обратных аукционов: атомарная обработка ставок, Polling / SSE / WebSocket, snapshot / replay / hybrid recovery и надёжная доставка уведомлений в Telegram Mini App.</p>
   <div class="hero-actions">
     <a class="button primary" href="nir2-results.html">Результаты НИР-2</a>
-    <a class="button ghost" href="methodology.html">Методика эксперимента</a>
+    <a class="button ghost" href="t1-ssg-comparison.html">T1 · Сравнение SSG</a>
+    <a class="button ghost" href="methodology.html">Методика</a>
   </div>
 </div>
 
@@ -39,6 +40,7 @@ TeleBid используется не как экономическая моде
 :maxdepth: 2
 
 nir2-results
+t1-ssg-comparison
 methodology
 architecture
 reproducibility
