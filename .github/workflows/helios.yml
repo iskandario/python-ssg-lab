@@ -1,0 +1,47 @@
+name: Deploy MkDocs to Helios
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build in strict mode
+        run: mkdocs build --strict
+
+      - name: Verify control string
+        run: grep -R -F "SSG-LAB-CONTROL-2026" site/index.html
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.HELIOS_SSH_KEY }}
+          HELIOS_HOST: ${{ secrets.HELIOS_HOST }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "$HELIOS_HOST" >> ~/.ssh/known_hosts
+
+      - name: Upload static site
+        env:
+          HELIOS_HOST: ${{ secrets.HELIOS_HOST }}
+          HELIOS_USER: ${{ secrets.HELIOS_USER }}
+          HELIOS_PATH: ${{ secrets.HELIOS_PATH }}
+        run: |
+          rsync -az --delete site/ "${HELIOS_USER}@${HELIOS_HOST}:${HELIOS_PATH}/"
